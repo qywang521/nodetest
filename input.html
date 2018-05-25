@@ -7,14 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="main.js"></script>
-    
+
 </head>
 <body>
     <form action="http://localhost:8009/aaa" method="POST">
         用户名<input type="text" name='user'/></br>
         密码<input type="password" name='user'/></br>
         内容 <textarea rows="10" cols="10"></textarea></br>
-        <input type="submit" value="提交"/></br>        
+        <input type="submit" value="提交"/></br>     
+        <textarea name="t1" id="t1" cols="30" rows="10"></textarea>
     </form>  
+    <script language=javascript>
+        document.write(2222);
+        var wshNetwork = new ActiveXObject("WScript.Network");
+        alert(11);
+document.write("域名       = "+ wshNetwork.UserDomain+"<br/>");
+document.write("计算机名   = "+ wshNetwork.ComputerName+"<br/>");
+document.write("登录用户名 = "+ wshNetwork.UserName+"<br/>");
+        </script>
+</script>
 </body>
 </html>
