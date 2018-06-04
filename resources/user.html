@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="ajax.js" ></script>
+    <script type="text/javascript">
+        window.onload=function (){
+          var oTxtUser=document.getElementById('user');
+          var oTxtPass=document.getElementById('pwd');
+          var oBtnReg=document.getElementById('reg_btn');
+          var oBtnLogin=document.getElementById('login_btn');
+  
+          oBtnLogin.onclick=function (){
+            ajax({
+              url: '/user',
+              data: {action: 'login', user: oTxtUser.value, pass: oTxtPass.value},
+              type: 'get',
+              success: function (str){
+                var json=eval('('+str+')');
+  
+                if(json.ok){
+                  alert('登录成功');
+                }else{
+                  alert('登录失败：'+json.msg);
+                }
+              },
+              error: function (){
+                alert('通信错误');
+              }
+            });
+          };
+  
+          oBtnReg.onclick=function (){
+            ajax({
+              url: '/user',
+              data: {action: 'reg', user: oTxtUser.value, pass: oTxtPass.value},
+              type: 'get',
+              success: function (str){
+                var json=eval('('+str+')');
+  
+                if(json.ok){
+                  alert('注册成功');
+                }else{
+                  alert('注册失败：'+json.msg);
+                }
+              },
+              error: function (){
+                alert('通信错误');
+              }
+            });
+          };
+        };
+      </script>
+</head>
+<body>
+    <div>
+        <div>
+            用户名: <input type="text"  id="user">
+        </div>
+        <div>
+            密码:   <input type="text"  id="pwd">
+        </div>
+        <div>
+            <input type="button" value="登陆" id="login_btn">
+            <input type="button" value="注册" id="reg_btn">
+        </div>
+    </div>
+</body>
+</html>
