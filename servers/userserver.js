@@ -30,27 +30,27 @@ var server=http.createServer(function(req,res){
         if(url=='/user'){
             switch(get.action){
                 case 'reg':
-                    if(get.user){
-                        req.write('{"ok":false,"msg":"用户已存在"}');
+                    if(users[get.user]){
+                        res.write('{"ok":false,"msg":"用户已存在"}');
                     }else{
-                        users[get.user]=get.pwd;
-                        req.write('{"ok":true,"msg":"注册成功"}');
+                        users[get.user]=get.pass;
+                        res.write('{"ok":true,"msg":"注册成功"}');
                     }
                     break;
                 case 'login':
-                    if(users[get.user==null]){
-                        req.write('{"ok":false,"msg":"用户不存在"}');
-                    }else if(users[get.user]!=get.pwd){
-                        req.write('{"ok":false,"msg":"用户名或密码错误"}');
+                    if(users[get.user]==null){
+                        res.write('{"ok":false,"msg":"用户不存在"}');
+                    }else if(users[get.user]!=get.pass){
+                        res.write('{"ok":false,"msg":"用户名或密码错误"}');
                     }else{
-                        req.write('{"ok":true,"msg":"登陆成功"}');
+                        res.write('{"ok":true,"msg":"登陆成功"}');
                     }
 
                     break;
                 default:
                     res.write('{"ok":false,"msg":"not found action"}');
             }
-
+            res.end();
         //文件
         }else{
             console.log('进入文件读取中');
@@ -63,7 +63,9 @@ var server=http.createServer(function(req,res){
                 }else{
                     console.log(3);
                     res.write(data);
+                    console.log('输出：'+file_name+'结束');
                 }
+                res.end();
             });
            
         }
