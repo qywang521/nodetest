@@ -2,11 +2,11 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
  
-app.use(express.static('resources'));//没搞明白用法 
+app.use(express.static('./resources'));// 静载资源文件有限寻找的目录
  
 app.get('/index.htm', function (req, res) {
  
-   res.sendFile(__dirname+"/testexpress.html" );
+   res.sendFile(__filename+"/../resources/testexpress.html" );
 })
  
 app.get('/process_get', function (req, res) {
